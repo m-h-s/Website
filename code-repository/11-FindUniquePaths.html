@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+ 
+ 
+<title> Find All Unique Paths </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+</head>
+
+
+
+<body>
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id= "heading"> Title: </p>
+
+<p class = "strong" > Find All Unique Paths </p> 
+
+<!-- ///////  -->
+
+<!-- Link to LeetCode -->
+
+<p id= "heading">Link to LeetCode:</p>
+
+<p> <a href = "https://leetcode.com/problems/unique-paths/"> https://leetcode.com/problems/unique-paths/</a> </p>
+
+<!-- ///////  -->
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p> 
+A robot is located at the top-left corner of a m x n grid. <br>
+The robot can only move either down or right at any point in time. <br>
+The robot is trying to reach the bottom-right corner of the grid. <br> 
+How many possible unique paths are there? <br> <br>
+
+Constarints: <br>
+1 <= m, n <= 100 <br>
+It's guaranteed that the answer will be less than or equal to 2 * 10 ^ 9.
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p> 
+Input: m = 3, n = 2 <br>
+Output: 3 <br><br>
+Explanation:
+From the top-left corner, <br>
+there are a total of 3 ways to reach the bottom-right corner: <br>
+1. Right -> Right -> Down <br>
+2. Right -> Down -> Right <br>
+3. Down -> Right -> Right <br>
+</p>
+
+
+<p class = "strong" > Example 2: </p>
+<p>
+Input: m = 7, n = 3 <br>
+Output: 28 <br>
+</p>
+
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+public interface PathFinder {
+	
+	public int uniquePaths(int m, int n);
+}
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+	<ol>
+	
+	<li> Start from the destination cell and move upward over the diameter of the matrix. </li>
+	<li> Count unique paths from the cell to destination. </li>
+	<li> Count unique paths from all the cells that are in the same row with the cell. </li>
+	<li> Count unique paths from all the cells that are in the same column with the cell. </li>
+	     # unique paths from a cell to the destination = # unique paths from the right neighbor + # unique path from the bottom neighbor.
+    <li> Go the next cell on the diameter of the matrix. </li>
+	<li> Return the # unique paths from cell [0][0] to the destination. </li>
+	</ol>
+	
+
+<!-- ///////  -->
+
+<!-- RunTime Analysis  -->
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p> </p>
+
+<!-- ///////  -->
+
+<!-- GitHub  -->
+
+<p id ="heading"> GitHub Project: </p>
+
+<p> <a href = "">  </a> </p>
+
+<!-- ///////  -->
+ 
+ <!-- Code  -->
+
+<p id ="heading"> Code: </p>
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+/**
+ * 
+ * @author Mahsa Sadi
+ * 
+ * @since 2020 - 04 - 01
+ * 
+ * License: Creative Commons
+ * 
+ * Copyright by Mahsa Sadi
+ * 
+ *
+ */
+
+public class PathFinderV2 implements PathFinder {
+	
+	
+	/**
+	 * Problem: Find All Unique Paths
+	 * 
+	 * Description:
+	 * 
+	 * A robot is located at the top-left corner of a m x n grid.
+	 * The robot can only move either down or right at any point in time. 
+	 * The robot is trying to reach the bottom-right corner of the grid.
+	 * How many possible unique paths are there?
+	 * 
+	 * 
+	 * 
+	 * Solution:
+	 * 
+	 * 1- Start from the destination cell and move upward over the diameter of the matrix. 
+	 * 2- Count unique paths from the cell to destination.
+	 * 3- Count unique paths from all the cells that are in the same row with the cell.
+	 * 4- Count unique paths from all the cells that are in the same column with the cell.
+	 *   
+	 *    # unique paths from a cell to the destination 
+	 *    = # unique paths from the right neighbor
+	 *    + # unique path from the bottom neighbor.
+	 *
+	 * 5- Go the next cell on the diameter of the matrix.
+	 * 
+	 * 6-Return the # unique paths from cell [0][0] to the destination. 
+	 * 
+	 */
+
+	int[][] numberOfUniquePathsFromNode;
+	int numberOfRows;
+	int numberOfColumns;
+
+	
+	
+	@Override
+	public int uniquePaths(int m, int n) 
+	{
+		numberOfUniquePathsFromNode = new int[m][n];
+		numberOfRows = m;
+		numberOfColumns = n;
+
+		int x = numberOfRows - 1;
+		int y = numberOfColumns - 1;
+
+		while (x >= 0 && y >= 0) {
+			for (int i = x; i >= 0; i--)
+				countPathsFromNode(i, y);
+
+			for (int j = y - 1; j >= 0; j--)
+				countPathsFromNode(x, j);
+			x--;
+			y--;
+		}
+
+		return numberOfUniquePathsFromNode[0][0];
+	}
+
+	
+	
+	
+	public void countPathsFromNode(int x, int y) 
+	{
+
+		if (x == numberOfRows - 1) {
+			if (y == numberOfColumns - 1)
+				numberOfUniquePathsFromNode[x][y] = 1;
+
+			else
+				numberOfUniquePathsFromNode[x][y] = numberOfUniquePathsFromNode[x][y + 1];
+		}
+
+		else if (y == numberOfColumns - 1)
+			numberOfUniquePathsFromNode[x][y] = numberOfUniquePathsFromNode[x + 1][y];
+
+		else
+			numberOfUniquePathsFromNode[x][y] = numberOfUniquePathsFromNode[x + 1][y]
+					+ numberOfUniquePathsFromNode[x][y + 1];
+
+	}
+
+}
+</pre>
+<!-- ///////  -->
+
+</code>
+
+</div>
+
+<body>
+
+</html>

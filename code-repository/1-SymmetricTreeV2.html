@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+
+
+
+
+<title> Symmetric Tree Java Code </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+</head>
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+<div id = "container">
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id = "heading"> Title: </p>
+
+<p class = "strong" > Symmetric Binary Tree Version 2 </p> 
+
+<!-- ///////  -->
+
+
+<!-- Link to LeetCode -->
+
+<p id = "heading"> Link to LeetCode:</p>
+
+<p class = "explanation" > <a href = "https://leetcode.com/problems/symmetric-tree/"> https://leetcode.com/problems/symmetric-tree/ </a> </p>
+
+<!-- ///////  -->
+
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p class = "explanation" > Given a binary tree, check whether it is a mirror of itself 
+(i.e.; it is symmetric around its center.) 
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p class = "explanation" > This binary tree [1,2,2,3,4,4,3] is symmetric.</p>
+<p class = "strong"> Example 2: </p>
+
+<p class = "explanation" > But the following [1,2,2,null,3,null,3] is not. </p>
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+public class SymmetryCheckerV2 {
+
+	public boolean isSymmetric(TreeNode root) {
+		
+	}
+
+}
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+<p class = "explanation" >
+1-	Start from root <br>
+2-	Read the nodes in each level <br>
+3-	Is the level Palindrome? <br>
+&nbsp &nbsp &nbsp  4-	No: Return false <br>
+4-	Yes: Go to the next level <br>
+5-  Return true <br>
+
+</p>
+
+<!-- RunTime Analysis  -->
+
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p class = "explanation" > </p>
+
+<!-- ///////  -->
+
+
+
+
+
+<!-- GitHub  -->
+
+<p id = "heading"> GitHub Project: </p>
+
+<p class = "explanation" > <a href = "">  </a> </p>
+
+<!-- ///////  -->
+ 
+ <!-- Code  -->
+
+<p id = "heading"> Code: </p>
+
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+import java.util.*;
+
+/**
+ * 
+ * @author Mahsa Sadi
+ * @since 2020-02-10
+ * 
+ * 
+ * Problem: Given a binary tree, check whether it is a mirror of itself 
+ * (i.e.; it is symmetric around its center.)
+ * 
+ * Solution2: 
+ * 1- Start from root
+ * 2- Read Nodes in each level
+ * 3- Is the level Palindrome?
+ *   4- No: Return False;
+ * 4- Yes: Go to the next level
+ *  
+ * @see LeetCode Problem: Symmetric Binary Tree -> https://leetcode.com/problems/symmetric-tree/submissions/
+ *
+ */ 
+
+public class SymmetryCheckerV2 implements SymmetryChecker {
+
+	public boolean isSymmetric(TreeNode root) {
+
+		List<TreeNode> currentLevel = new ArrayList<TreeNode>();
+		List<TreeNode> nextLevel = new ArrayList<TreeNode>();
+
+		/**
+		 * 1- Start from root.
+		 */
+		currentLevel.add(root);
+
+		while (!currentLevel.isEmpty()) {
+
+			/**
+			 * 2- Read each Level. 3- IsPalindrome?
+			 */
+			if (!isPalindrome(currentLevel))
+				return false;
+
+			/**
+			 * 4- Go to the next level.
+			 */
+			else {
+				
+				for (int i = 0; i < currentLevel.size(); i++) {
+					
+					if ( currentLevel.get(i) != null)
+					{
+						TreeNode lc = currentLevel.get(i).getLeftChild();
+						nextLevel.add(lc);
+
+						TreeNode rc = currentLevel.get(i).getRightChild();
+						nextLevel.add(rc);
+
+					}
+
+				}
+
+				currentLevel = nextLevel;
+				nextLevel = new ArrayList<TreeNode>();
+			}
+
+		}
+
+		return true;
+
+	}
+
+	public boolean isPalindrome(List<TreeNode> currentLevel) {
+		for (int i = 0; i < currentLevel.size() / 2; i++)
+
+		{
+			try {
+				if (currentLevel.get(i).getValue() != currentLevel.get(currentLevel.size() - 1 - i).getValue()) {
+					return false;
+
+				}
+			}
+
+			catch (Exception NullPointerException) {
+
+				if (currentLevel.get(i) == null && currentLevel.get(currentLevel.size() - 1 - i) != null)
+					return false;
+
+				else {
+					if (currentLevel.get(i) != null && currentLevel.get(currentLevel.size() - 1 - i) == null)
+						return false;
+				}
+
+			}
+		}
+
+		return true;
+
+	}
+
+}
+<!-- ///////  -->
+</pre>
+
+</code>
+
+</div>
+
+</div>
+
+<body>
+
+</html>

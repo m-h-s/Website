@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+
+
+
+<title> Symmetric Tree Java Code </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+</head>
+
+
+
+<body>
+
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id= "heading"> Title: </p>
+
+<p class = "strong" > Symmetric Binary Tree - Version 3 </p> 
+
+<!-- ///////  -->
+
+
+<!-- Link to LeetCode -->
+
+<p id= "heading">Link to LeetCode:</p>
+
+<p> <a href = "https://leetcode.com/problems/symmetric-tree/"> https://leetcode.com/problems/symmetric-tree/ </a> </p>
+
+<!-- ///////  -->
+
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p> Given a binary tree, check whether it is a mirror of itself 
+(i.e.; it is symmetric around its center.) 
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p> This binary tree [1,2,2,3,4,4,3] is symmetric.</p>
+<p class = "strong"> Example 2: </p>
+
+<p> But the following [1,2,2,null,3,null,3] is not. </p>
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+public class SymmetryCheckerV3 {
+
+	public boolean isSymmetric(TreeNode root) {
+		
+	}
+
+}
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+<p> Recursive Version: <br>
+	 <ol>
+	 
+	 <li> Divide the tree into Left-Tree and Right-Tree </li>
+	 <li> Left Traverse Left Tree recursively </li>
+	 <li> Right Traverse Right Tree recursively </li>
+	 <li> Check whether the sequence obtained from both traversals are equal. </li>
+	 </ol>
+    leftTraverse / rightTraverse:
+	 <ol>
+	 <li> Meet left child / Meet right child </li>
+	 <li> Meet right child / Meet left child </li>
+	 <li> Meet root / Meet root </li>
+	 </ol>
+	 or
+	 <ol>
+	 <li> Meet left child / Meet right child </li>
+	 <li> Meet root / Meet root </li>
+	 <li> Meet right child / Meet left child </li>
+	 </ol>
+</p>
+
+<!-- ///////  -->
+
+<!-- RunTime Analysis  -->
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p> </p>
+
+<!-- ///////  -->
+
+
+
+<!-- GitHub  -->
+
+<p id ="heading"> GitHub Project: </p>
+
+<p> <a href = "">  </a> </p>
+
+<!-- ///////  -->
+
+ 
+ <!-- Code  -->
+
+<p id ="heading"> Code: </p>
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+import java.util.*;
+/**
+ * 
+ * @author Mahsa Sadi
+ * @since 2020-02-13
+ *
+ */
+
+public class SymmetryCheckerV3 implements SymmetryChecker  {
+	/**
+	 * Symmetry Checker Version 3:
+	 * 
+	 * Recursive Algorithm:
+	 * 
+	 * 1- Divide the tree into Left-Tree and Right-Tree 
+	 * 2- Left Traverse Left Tree recursively 
+	 * 3- Right Traverse Right Tree recursively 
+	 * 4- Check whether the sequence obtained from both traversals are equal.
+	 * 
+	 * 
+	 * leftTraverse / rightTraverse:
+	 * 
+	 * 1-meet left child / meet right child 
+	 * 2-meet right child / meet left child
+	 * 3-mild root / meet root
+	 * 
+	 * or
+	 * 
+	 * 1-meet left child / meet right child 
+	 * 2-meet root / meet root 
+	 * 3-meet right child / meet left child
+	 */
+
+	List<Integer> lTResult;
+	List<Integer> rTResult; 
+
+	public boolean isSymmetric(TreeNode root) {
+
+		lTResult = new ArrayList<Integer>();
+		rTResult = new ArrayList<Integer>();
+
+		TreeNode lr, rr;
+
+		if ( root == null)
+			return true;
+
+		else {
+			lr = root.getLeftChild();
+			rr = root.getRightChild();
+
+
+			if (lr == null) {
+				if (rr == null)
+					return true;
+
+				else
+					return false;
+			}
+
+			else if (rr == null) {
+				if (lr == null)
+					return true;
+
+				else
+					return false;
+			}
+
+			else if (lr.getValue() != rr.getValue())
+				return false;
+
+			else {
+				leftTraverse(lr);
+				rightTraverse(rr);
+
+				return isEqual(lTResult, rTResult);
+			}
+		}
+
+	}
+
+	public boolean isEqual(List<Integer> l1, List<Integer> l2) {
+
+		if (l1.size() != l2.size())
+			return false;
+		else {
+			for (int i = 0; i < l1.size(); i++)
+				if (l1.get(i) != l2.get(i))
+					return false;
+		}
+
+		return true;
+	}
+
+	public void leftTraverse(TreeNode root) {
+
+		if (root == null)
+			lTResult.add(null);
+
+		else if (isLeaf(root))
+			lTResult.add(root.getValue());
+
+		else {
+			TreeNode lc = root.getLeftChild();
+
+			if (lc != null)
+				leftTraverse(lc);
+			else
+				lTResult.add(null);
+
+			TreeNode rc = root.getRightChild();
+
+			if (rc != null)
+				leftTraverse(rc);
+			else
+				lTResult.add(null);
+
+			lTResult.add(root.getValue());
+
+		}
+
+	}
+
+	public void rightTraverse(TreeNode root) {
+
+		if (root == null)
+			rTResult.add(null);
+
+		else if (isLeaf(root))
+			rTResult.add(root.getValue());
+
+		else {
+			TreeNode rc = root.getRightChild();
+
+			if (rc != null)
+				rightTraverse(rc);
+			else
+				rTResult.add(null);
+
+			TreeNode lc = root.getLeftChild();
+
+			if (lc != null)
+				rightTraverse(lc);
+			else
+				rTResult.add(null);
+
+			rTResult.add(root.getValue());
+
+		}
+
+	}
+
+	public boolean isLeaf(TreeNode n) {
+		return n.getLeftChild() == null && n.getRightChild() == null;
+	}
+
+}
+<!-- ///////  -->
+</pre>
+
+</code>
+
+</div>
+
+<body>
+
+</html>

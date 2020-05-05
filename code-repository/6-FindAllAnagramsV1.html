@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+ 
+ 
+<title> Find All Anagrams </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+</head>
+
+
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id= "heading"> Title: </p>
+
+<p class = "strong" > Find All Anagrams - Version 1 </p> 
+
+<!-- ///////  -->
+
+
+<!-- Link to LeetCode -->
+
+<p id= "heading">Link to LeetCode:</p>
+
+<p> <a href = "https://leetcode.com/problems/find-all-anagrams-in-a-string/"> https://leetcode.com/problems/find-all-anagrams-in-a-string/ </a> </p>
+
+<!-- ///////  -->
+
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p> Given a string s and a non-empty string p, <br>
+	find all the start indices of p's anagrams in s.<br><br>
+
+	Note:<br>
+	Strings consists of lowercase English letters only, <br>
+	and the length of both strings s and p will not be larger than 20,100. <br>
+	The order of output does not matter.
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p> 
+<strong>
+Input:  </strong> <br>
+s: "cbaebabacd"&nbsp;&nbsp;&nbsp;&nbsp; p: "abc" <br>
+
+<strong> Output: </strong> <br>
+[0, 6] <br>
+</p>
+
+
+<p class = "strong" > Example 2: </p>
+<p> 
+<strong>
+Input:  </strong> <br>
+s: "abab"&nbsp;&nbsp;&nbsp;&nbsp; p: "ab"<br>
+
+<strong> Output: </strong> <br>
+[0, 1, 2] <br>
+</p>
+
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+import java.util.*;
+
+public interface AnagramMatcher {
+
+public List&lt;Integer&gt; findAnagrams(String s, String p);
+}
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+	Definition: An anagram of a string contains all the letters of the string. <br>
+	However, the order of letters does not matter.<br><br>
+	
+	<strong> Main Idea: </strong> <br>
+	
+	Consider a sliding window over s. <br>
+		The size of sliding window is the size of p. <br>
+		Slide this window over s and check whether this window matches p. <br>
+		If this window matches p, add the start of sliding window to the results. <br>
+		Otherwise slide (i.e.; move) the window over s. <br><br>
+    <strong> Steps: </strong> <br>
+
+	 <ol>
+	 <li> Consider a sliding window of size p (p is the phrase to be found and matched). <br>
+		  This sliding window always contains p.length characters from s. <br>
+		  s is the string that is searched.) <br>
+		  This sliding window moves over s. <br>
+	      This sliding window initially starts at the beginning of s.</li>
+		  
+		  
+		  
+	 <li> Read each letter in the slidingWindow and match it against the letters of p. </li>
+	 
+	 Is the letter found in p?<br>
+	 <ol>
+	     <li> <strong> Yes: </strong> Eliminate that letter from phrase to be checked and go to the next letter in the sliding window.</li>
+		 <li> <strong> No: </strong> Do another check:</li>
+ 		      <ol>
+			  Is the letter in p but eliminated previously?
+			  <ol>
+			  <strong>Yes:</strong>
+			  <li> Find the position of the first occurrence of the letter in the slidingWindow. </li>
+			  <li> Add all the letters between the start of the slidingWindow, <br>
+       			   and that position to the phrase to be checked and matched again.</li>
+			  <li> Move the beginning of the sliding window to immediately after that position.</li>
+			  <li> Fill the sliding window with p.length characters.</li>
+			  <li> Resume reading letters one by one and matching against the phrase. <br>
+	               Go to 2-.</li>
+			  </ol>
+			  <ol>
+			  <strong> No: </strong>
+			  <li> Move the beginning of the sliding window to the position right after the letter. </li>
+			  <li> Fill the sliding window with p.length letters. </li>
+			  <li> Reset the matching phrase to all the letters in p.</li>
+			  <li> Resume reading letters one by one and matching against the phrase.</li>
+			  <li> Go to 2-. </li>
+			  </ol>
+	 </ol>
+	 <li> If the sliding window completely matches the phrase, <br>
+	      add the beginning of sliding window to the results. </li>
+     
+     <li> Move the sliding Window one position to the right. </li>
+     <li> Resume Matching. Go to 2-.</li>	 
+	 </ol>
+   </ol>
+
+<!-- ///////  -->
+
+<!-- RunTime Analysis  -->
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p> </p>
+
+<!-- ///////  -->
+
+<!-- GitHub  -->
+
+<p id ="heading"> GitHub Project: </p>
+
+<p> <a href = "">  </a> </p>
+
+<!-- ///////  -->
+ 
+ <!-- Code  -->
+
+<p id ="heading"> Code: </p>
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+import java.util.*;
+/**
+ * 
+ * @author Mahsa Sadi
+ * 
+ * @since 2020 - 03 - 11
+ * 
+ * License: Creative Commons
+ * 
+ * Copyright by Mahsa Sadi
+ *
+ */
+
+public class AnagramMatcherV3 implements AnagramMatcher {
+	
+	/**
+	 * Problem: 
+	 * 
+	 * Find All Anagrams in a String
+	 * 
+	 * 
+	 * Description:
+	 * 
+	 * Given a string s and a non-empty string p, 
+	 * find all the start indices of p's anagrams in s.
+	 * 
+	 * Note:
+	 * Strings consists of lower-case English letters only and the length of both strings s and p will not be larger than 20,100.
+	 * The order of output does not matter.
+	 * 
+	 * 
+	 * Solution:
+	 * 
+	 * Definition: An anagram of a string contains all the letters of the string.
+	 * However, the order of letters does not matter.
+	 * 
+	 * Main idea: 
+	 * 
+	 * Consider a sliding window over s. 
+	 * The size of sliding window is the size of p.
+	 * Slide this window over s and check whether this window matches p.
+	 * If this window matches p, add the start of sliding window to the results.
+	 * Otherwise slide (i.e.; move) the window over s. 
+	 * 
+	 * 
+	 * 
+	 * 1- Consider a sliding window of size p ( p is the phrase to be found and matched).
+	 *    This sliding window always contains p.length characters from s.
+	 *    s is the string that is searched.)
+	 *    This sliding window moves over s.
+	 *    This sliding window initially starts at the beginning of s.
+	 *    
+	 *    
+	 *    
+	 *2- Read each letter in the sliding window and match it against the letters of p.
+	 *
+	 *
+	 *
+	 *3- If the letter is found in p,
+	 *   eliminate that letter from phrase to be checked and go to the next letter in the slidingWindow.
+	 *   
+	 *   
+	 *4- If the letter is not found in p do another check:
+	 * 
+	 * 
+	 *5- Check: Is the letter in p but eliminated previously?
+	 *  
+	 *    5-1 Yes:
+	 *    
+	 *      5-1-1: Find the position of the first occurrence of the letter in the sliding window.
+	 *      
+	 *      5-1-2: Add all the letters between the start of the slidingWindow and that position to 
+	 *             the phrase to be checked and matched again.
+	 *      5-1-3: Move the beginning of the sliding window to immediately after that position.
+	 *      5-1-4: Fill the sliding window with p.length characters.
+	 *      
+	 *      5-1-5: Resume reading letters one by one and matching against the phrase.
+	 *             Go to 2-.
+	 *      
+	 *   5-2: No:
+	 *     5-1: Move the beginning of the sliding window to the position right after the letter.
+	 *     5-2: Fill the sliding window with p.length letters.
+	 *     5-3: reset the matching phrase to all the letters in p.
+	 *     5-4: Resume reading letters one by one and matching against the phrase.
+	 *     Go to 2-.
+	 *    
+	 *     
+	 *     
+	 * 6- If the sliding window completely matches the phrase,
+	 * add the beginning of sliding window to the results.
+	 * 
+	 * 7- Move the sliding Window one position to the right.
+	 * 
+	 * 8- Resume Matching. Go to 2-.
+	 *   
+	 *  
+	 
+	 */
+
+	@Override
+	public List&lt;Integer&gt; findAnagrams(String s, String p) {
+		
+		List <Integer> indices = new ArrayList <Integer> ();
+		
+		int startOfSlidingWindow, endOfSlidingWindow, currentPositionInSlidingWindow;
+		startOfSlidingWindow = currentPositionInSlidingWindow = 0;
+		
+		int slidingWindowLength = p.length();
+		
+		endOfSlidingWindow  = slidingWindowLength - 1;
+		StringBuilder expected = new StringBuilder (p);
+		
+		
+		while (endOfSlidingWindow &lt; s.length())
+		{
+			
+			while (currentPositionInSlidingWindow <= endOfSlidingWindow && endOfSlidingWindow < s.length ())
+			{   
+			
+				char ch = s.charAt(currentPositionInSlidingWindow);
+				
+				boolean charIsInP = false;
+				
+				for (int i = 0; i < expected.length(); i++ )
+				{
+					if (ch == expected.charAt(i))
+					{
+						charIsInP = true;
+						expected.deleteCharAt(i);
+						break;
+					}
+				}
+				
+				if (charIsInP)
+					currentPositionInSlidingWindow++;
+				
+				else if (!charIsInP)
+				{
+					boolean charWasInPAndEliminatedBefore = false;
+					
+					for (int i = startOfSlidingWindow; i < currentPositionInSlidingWindow; i++)
+						if (s.charAt(i) == s.charAt(currentPositionInSlidingWindow))
+						{
+							for (int j = startOfSlidingWindow; j < i; j++)
+								expected.append(s.charAt(j));
+							
+							endOfSlidingWindow = endOfSlidingWindow + ( i - startOfSlidingWindow + 1 );
+							startOfSlidingWindow = i + 1;
+							currentPositionInSlidingWindow ++;
+							
+							charWasInPAndEliminatedBefore = true;
+							
+							break;
+						}
+					
+					
+					if (!charWasInPAndEliminatedBefore)
+					{
+						startOfSlidingWindow = currentPositionInSlidingWindow + 1;
+						endOfSlidingWindow = startOfSlidingWindow + slidingWindowLength - 1;
+						currentPositionInSlidingWindow = startOfSlidingWindow;
+						expected = new StringBuilder (p);
+					}
+				} 
+				
+			}
+			
+			if (endOfSlidingWindow >= s.length())
+				break;
+			
+			else if (expected.length() == 0 )
+			{
+				indices.add(startOfSlidingWindow);
+				expected.append(s.charAt(startOfSlidingWindow));
+				startOfSlidingWindow++;
+				endOfSlidingWindow++;
+				currentPositionInSlidingWindow = endOfSlidingWindow;
+				
+			}
+			
+		}
+		
+		
+		return indices;
+	}
+
+}
+</pre>
+<!-- ///////  -->
+
+</code>
+
+</div>
+
+<body>
+
+</html>

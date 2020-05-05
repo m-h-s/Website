@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+ 
+ 
+<title> Generate Well-Formed Parenthesese </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+</head>
+
+
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id= "heading"> Title: </p>
+
+<p class = "strong" > Generate Well-Formed Parenthesese of Length N - Version 1 </p> 
+
+<!-- ///////  -->
+
+
+<!-- Link to LeetCode -->
+
+<p id= "heading">Link to LeetCode:</p>
+
+<p> <a href = "https://leetcode.com/problems/generate-parentheses/"> https://leetcode.com/problems/generate-parentheses/ </a> </p>
+
+<!-- ///////  -->
+
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p> Given n pairs of parentheses, <br>
+    write a function to generate all combinations of well-formed parentheses.
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p> Input:  n = 3 <br>
+    Output: [ <br>
+  "((()))", <br>
+  "(()())", <br>
+  "(())()", <br>
+  "()(())", <br>
+  "()()()" <br>
+] <br>
+</p>
+
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+import java.util.List;
+
+public interface ParenthesesGenerator {
+
+	public List<String> generateParenthesis(int n);
+	
+}
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+	 <ol>
+	 <li> initialize list of all valid sentences with length N to []. </li>
+	 <li> counter = 0. </li>
+	 <li> counter ++. </li>
+	 <li> Open Parenthesis. </li>
+	 <li> max number of allowed close parenthesis ++. </li>
+	 <li> for i = 0 to max number number of valid close parenthesis.</li>
+	 <ol> 
+	 <li> Close Parenthesis for i times. </li>
+	 <li> Repeat (Go to 3-) if counter != N  </li>
+	 </ol>
+	 <li> Add generated sentence to the list of valid sentences if length of sentence = N * 2; </li>
+	 </ol>
+	 
+	 
+
+<!-- ///////  -->
+
+<!-- RunTime Analysis  -->
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p> </p>
+
+<!-- ///////  -->
+
+<!-- GitHub  -->
+
+<p id ="heading"> GitHub Project: </p>
+
+<p> <a href = "">  </a> </p>
+
+<!-- ///////  -->
+ 
+ <!-- Code  -->
+
+<p id ="heading"> Code: </p>
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+import java.util.*;
+/**
+ * 
+ * @author Mahsa Sadi
+ * 
+ * @since 2020-02-26
+ * 
+ * License: Creative Commons
+ * 
+ * Copyright by Mahsa Sadi
+ *
+ */
+
+
+public class ParenthesesGeneratorV1 implements ParenthesesGenerator {
+
+	/**
+	 * 
+	 * Problem: Generate Parentheses
+	 * 
+	 * 
+	 * Description:
+	 * 
+	 * Given n pairs of parentheses, 
+	 * write a function to generate all combinations of well-formed parentheses.
+	 * 
+	 * 
+	 * 
+	 * Solution:
+	 * 
+	 * 1- list of all valid sentences with length N = {};
+	 * 
+	 * 2- counter = 0;
+	 * 
+	 * 3- counter ++;
+	 * 
+	 * 4- Open Parenthesis.
+	 * 
+	 * 5- max number of allowed close parenthesis ++;
+	 * 
+	 * 
+	 * 6- for i = 0 to max number number of valid close parenthesis 
+	 * 
+	 *   6-1 Close Parenthesis for i times.
+	 *   6-2 Repeat (Go to 3-) if counter != N 
+	 *   
+	 * 
+	 * 7 - Add generated sentence to the list of valid sentences if length of sentence = N * 2;
+	 * 
+	 * 
+	 */
+
+	
+	List<String> validSentences;
+	int numberOfPairs;
+	final String OpenTerm = "(" ;
+	final String CloseTerm = ")";
+
+
+	public List<String> generateParenthesis(int n) {
+
+		validSentences = new ArrayList <String> ();
+		numberOfPairs = n;
+		generateSentence ("", 0, 0);
+		return validSentences;
+
+
+
+
+	}
+
+	public void generateSentence (String sentence, int counter, int maxNumberofValidCloseTerms)
+	{
+		
+		
+		if (counter == numberOfPairs)
+		{  		
+			if ( sentence.length() == numberOfPairs * 2 )
+				validSentences.add(sentence);
+
+		}
+
+		else 
+		{
+			counter++;
+			
+			sentence += OpenTerm;
+			
+			maxNumberofValidCloseTerms ++;
+
+			for (int i = 0; i <= maxNumberofValidCloseTerms; i++)
+			
+				generateSentence (sentence + CloseTerm.repeat (i), counter, (maxNumberofValidCloseTerms - i));
+
+		}
+
+	}
+
+}
+
+<!-- ///////  -->
+</pre>
+
+</code>
+
+</div>
+
+<body>
+
+</html>

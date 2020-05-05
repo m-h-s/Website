@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+ 
+ 
+<title> Find Minimum Sum Path </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+</head>
+
+
+
+<body>
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id= "heading"> Title: </p>
+
+<p class = "strong" > Find Minimum Sum Path </p> 
+
+<!-- ///////  -->
+
+<!-- Link to LeetCode -->
+
+<p id= "heading">Link to LeetCode:</p>
+
+<p> <a href = "https://leetcode.com/problems/minimum-path-sum/"> https://leetcode.com/problems/minimum-path-sum/</a> </p>
+
+<!-- ///////  -->
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p> 
+Given a m x n grid filled with non-negative numbers, <br>
+find a path from top left to bottom right which minimizes the sum of all numbers along its path. <br>
+Note: You can only move either down or right at any point in time.
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p> 
+Input: <br>
+[ <br>
+  [1,3,1], <br>
+  [1,5,1], <br>
+  [4,2,1] <br>
+] <br>
+Output: 7 <br><br>
+Explanation: Because the path 1->3->1->1->1 minimizes the sum.
+</p>
+
+
+<p class = "strong" > Example 2: </p>
+<p>
+</p>
+
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+public interface MinimumPathFinder {
+	
+	public int minPathSum(int[][] grid);
+
+}
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+	<ol>
+	
+	<li> Start from the destination and move upward over the diameter of the m*n matrix. </li>
+	<li> Calculate the minimum path from that cell to the destination. </li>
+	<li> Minimum path = minimum (minimum path from the right neighbor, minimum path from the bottom neighbor) + cost of the cell. </li>
+	<li> Calculate the minimum path for all the cells in the same row with the cell. </li>
+	<li> Calculate the minimum path for all the cells in the same column with the cell. </li>
+	<li> Go the next cell on the diameter of the m*n matrix.</li>
+	<li> Return the minimum path for cell [0,0]. </li>
+	</ol>
+	
+
+<!-- ///////  -->
+
+<!-- RunTime Analysis  -->
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p> </p>
+
+<!-- ///////  -->
+
+<!-- GitHub  -->
+
+<p id ="heading"> GitHub Project: </p>
+
+<p> <a href = "">  </a> </p>
+
+<!-- ///////  -->
+ 
+ <!-- Code  -->
+
+<p id ="heading"> Code: </p>
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+import java.util.Arrays;
+/**
+ * 
+ * @author Mahsa Sadi
+ * 
+ * @since 2020 - 03 - 31
+ * 
+ * License: Creative Commons
+ * 
+ * Copyright by Mahsa Sadi
+ *
+ */
+
+public class MinimumPathFinderV2 implements MinimumPathFinder {
+	
+	/**
+	 * 
+	 * Problem: Minimum Sum Path
+	 * 
+	 * 
+	 * Description:
+	 * 
+	 * Given a m x n grid filled with non-negative numbers, 
+	 * find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+	 * Note: You can only move either down or right at any point in time.
+	 * 
+	 * 
+	 * 
+	 * Solution:
+	 * 
+	 * 1- Start from the destination and move over the diameter of the m*n matrix.
+	 * 2- Calculate the minimum path from that cell to the destination.
+	 *    Minimum path = minimum (minimum path from the right neighbor, minimum path from the bottom neighbor) + cost of the cell
+	 * 3- Calculate the minimum path for all the cells in the same row with the cell.
+	 * 4- Calculate the minimum path for all the cells in the same column with the cell.
+	 * 5- Go the next cell on the diameter of the m*n matrix.
+	 * 6- Return the minimum path for cell [0,0].
+	 * 
+	 * 
+	 */
+
+	int[][] localMinPath;
+	
+
+	@Override
+	public int minPathSum(int[][] grid) 
+	{
+
+		localMinPath = new int[grid.length][grid[0].length];
+
+		/* 
+		 * 1- Start from the destination.
+		 */
+		int x = grid.length - 1;
+		int y = grid[0].length - 1;
+
+		/*
+		 * Move over the diameter of the m * n matrix
+		 */
+
+		while (x >= 0 && y >= 0) 
+		{
+			/*
+			 * 2- Calculate localMinPath for all the elements on the same row with x.
+			 */
+			for (int i = x; i >= 0; i--)
+				updateLocalMinPath(grid, i, y);
+
+			/*
+			 * 3- Calculate localMinPath for all the elements on the same column with y.
+			 */
+			for (int j = y - 1; j >= 0; j--)
+				updateLocalMinPath(grid, x, j);
+
+			/*
+			 * 4- Go to the next element on the diameter of the m*n matrix.
+			 */
+			x --;
+			y --;
+		}
+
+		return localMinPath[0][0];
+	}
+
+
+
+	void updateLocalMinPath(int[][] grid, int x, int y) 
+	{
+		if (x == grid.length - 1)
+
+		{ 
+			if (y == grid[0].length - 1 )
+				localMinPath [x][y] = grid [x][y];
+
+
+			else 
+				localMinPath [x][y] = localMinPath [x][y+1] + grid [x][y] ;
+		}
+
+
+		else if (y == grid[0].length - 1)
+			localMinPath [x][y] = localMinPath [x+1][y] + grid [x][y] ;
+
+
+
+		else 
+			localMinPath [x][y] = Math.min(localMinPath [x][y+1], localMinPath [x+1][y]) + grid [x][y] ;
+	}
+
+}
+</pre>
+<!-- ///////  -->
+
+</code>
+
+</div>
+
+<body>
+
+</html>

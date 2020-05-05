@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+ 
+ 
+<title> Permutation Sequence </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+</head>
+
+
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id= "heading"> Title: </p>
+
+<p class = "strong" > Permutation Sequence </p> 
+
+<!-- ///////  -->
+
+<!-- Link to LeetCode -->
+
+<p id= "heading">Link to LeetCode:</p>
+
+<p> <a href = "https://leetcode.com/problems/permutation-sequence/">https://leetcode.com/problems/permutation-sequence/</a> </p>
+
+<!-- ///////  -->
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p> 
+The set [1,2,3,...,n] contains a total of n! unique permutations. <br>
+
+By listing and labeling all of the permutations in order, we get the following sequence for n = 3: <br>
+
+
+"123" <br>
+"132" <br>
+"213" <br>
+"231" <br>
+"312" <br>
+"321" <br>
+Given n and k, return the kth permutation sequence. <br>
+
+Note: <br>
+
+Given n will be between 1 and 9 inclusive. <br>
+Given k will be between 1 and n! inclusive. <br>
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p> 
+Input: n = 3, k = 3 <br>
+Output: "213" <br>
+</p>
+
+
+<p class = "strong" > Example 2: </p>
+<p> 
+Input: n = 4, k = 9 <br>
+Output: "2314"
+</p>
+
+
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+
+public interface PermutationFinder {
+	
+    public String getPermutation(int n, int k);
+
+}
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+ <p> Main Idea: <br> 
+	 floor (k / (n-1)!) + 1 identifies the first number in the kth permutation sequence.  <br>
+	 floor ( ( k % (n-1) ! + 1 ) / (n-2)!) + 1 identifies the second number in the kth sequence. <br>
+	 floor (((k % (n-1) ! + 1 ) / (n-2)! +1) / (n-3) !) + 1 identifies the third number in the kth sequence. <br>
+	 and so on.... <br>
+	 
+	 <ol>
+ 
+	 <li> Consider a list of integers containing numbers 1, ..., n. </li>
+     <li> Calculate floor (k / (n-1)!) </li>
+	 <li> Calculate k % (n-1)! </li> 
+	 <li> If k > 0 </li>
+	 <ol>
+	  <li> Add number located at the position of floor (k / (n-1)!) to the kth permutation sequence. </li> 
+	  <li> Remove the added element from the list of numbers. </li>
+	  <li> n = n-1 </li>
+	  <li> k = k % (n-1)! </li>
+	  <li> go to (2-) </li>
+	  </ol>
+	 <li> else (i.e; k = 0)  </li> 
+	     <ol> <li> Add element number floor (k / (n-1)!) - 1 </li> </ol>
+	 
+	 <li> Add whatever element that has not been added in reverse order.</li>
+
+</ol>
+     	 
+	
+	
+
+<!-- ///////  -->
+
+<!-- RunTime Analysis  -->
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p> </p>
+
+<!-- ///////  -->
+
+<!-- GitHub  -->
+
+<p id ="heading"> GitHub Project: </p>
+
+<p> <a href = "">  </a> </p>
+
+<!-- ///////  -->
+ 
+ <!-- Code  -->
+
+<p id ="heading"> Code: </p>
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+/**
+ * @author Mahsa Sadi
+ * 
+ * @since 2020 - 04 - 09
+ * 
+ * License: Creative Commons
+ * 
+ * Copyright by Mahsa Sadi
+ * 
+ * 
+ *
+ */
+import java.util.*;
+
+public class PermutationFinderV2 implements PermutationFinder {
+
+	/**
+	 * Problem: Permutation Sequence
+	 * 
+	 * @see: https://leetcode.com/problems/permutation-sequence/
+	 * 
+	 * Description:
+	 * 
+	 * The set [1,2,3,...,n] contains a total of n! unique permutations.
+
+	   By listing and labeling all of the permutations in order, we get the following sequence for n = 3:
+	    "123"
+		"132"
+		"213"
+		"231"
+		"312"
+		"321"
+	 * 
+	 * Given n and k, return the kth permutation sequence.
+	 * 
+	 * Note:
+	 *     Given n will be between 1 and 9 inclusive.
+	 *     Given k will be between 1 and n! inclusive.
+	 * 
+	 * 
+	 * 
+	 * Solution:
+	 * 
+	 * Main Idea:
+	 *  floor (k / (n-1)!) + 1 identifies the first number in the kth permutation sequence. 
+	 *  floor ( ( k % (n-1) ! + 1 ) / (n-2)!) identifies the second number in the kth sequence.
+	 *  floor (  (k % (n-1) ! + 1 / (n-2)!  + 1 ) / (n-3) !) identifies the third number in the kth sequence.
+	 *  and so on.....
+	 *  
+	 *  
+	 *  
+	 * 
+	 * 1- Consider a list of integers containing numbers 1, ..., n.
+	 * 
+	 * 2- Calculate floor (k / (n-1)!)
+	 * 
+	 * 3- Calculate k % (n-1)!
+	 * 
+	 * 4- If k > 0
+	 * 
+	 *   add element number floor (k / (n-1)!)
+	 *   remove the added element from the list of numbers
+	 *   n = n-1
+	 *   k = k % (n-1) !
+	 *   go to (2-)
+	 *   
+	 * 5- else (i.e; k = 0) 
+	 *   add element number floor (k / (n-1)!) - 1
+	 * 
+	 * 6- add whatever element that has not been added in reverse order.
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+
+	@Override
+	public String getPermutation(int n, int k) {
+		
+
+		String KthPermutation = "";
+		List <String> letters = new ArrayList <String> ();
+		int iMinusOneFactorial = getFactorial (n);
+
+		for (int i = 1; i <= n; i++)
+			letters.add(String.valueOf(i));
+
+		for (int i = n-1; i > 0; i--)
+		{
+			iMinusOneFactorial = iMinusOneFactorial / (i+1);
+
+			if ( k >= iMinusOneFactorial) 
+			{
+				int number = Math.floorDiv(k , iMinusOneFactorial);
+				k =  k % iMinusOneFactorial;
+
+				if( k > 0)
+					KthPermutation += letters.remove(number);
+
+				else
+				{ 
+					KthPermutation += letters.remove(number - 1);
+					break;
+				}
+			}
+
+			else
+			{ 
+				KthPermutation += letters.remove(0);
+			}
+
+
+		}
+
+
+		for(int i = letters.size() - 1; i >= 0; i-- )
+			KthPermutation += letters.remove(i);
+
+		return KthPermutation;
+	}
+
+
+	public int getFactorial (int n)
+	{
+		int result = 1;
+
+		for (int i = n; i > 0; i--)
+			result *= i;
+
+		return result;
+	}
+
+}
+</pre>
+<!-- ///////  -->
+
+</code>
+
+</div>
+
+<body>
+
+</html>

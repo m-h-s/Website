@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+ 
+ 
+<title> Maximum Subarray </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+</head>
+
+
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id= "heading"> Title: </p>
+
+<p class = "strong" > Maximum Subarray </p> 
+
+<!-- ///////  -->
+
+<!-- Link to LeetCode -->
+
+<p id= "heading">Link to LeetCode:</p>
+
+<p> <a href = "https://leetcode.com/problems/maximum-subarray/"> https://leetcode.com/problems/maximum-subarray/</a> </p>
+
+<!-- ///////  -->
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p> 
+Given an integer array <code>nums</code>, <br>
+find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p> 
+Input: [-2,1,-3,4,-1,2,1,-5,4]<br>
+Output: 6 <br>
+Explanation: [4,-1,2,1] has the largest sum = 6.
+</p>
+
+
+<p class = "strong" > Example 2: </p>
+<p> </p>
+
+
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+public interface MaxSumSubArrayFinder {
+	
+	public int maxSubArray(int[] nums);
+
+}
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+<ol>
+
+<li> Start from the beginning of the array. </li>
+<li> Add the elements to the maximum sub-array one by one. </li>
+<li> Compare the sum of the elements with the maximum sum. </li>
+<li> Update the maximum sum if required. </li>
+<li> As soon as the sum of the elements gets negative, <br>
+     reset sum to zero. </li>
+<li> Continue (Go to 2-). </li>
+
+</ol>
+     	 
+	
+	
+
+<!-- ///////  -->
+
+<!-- RunTime Analysis  -->
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p> </p>
+
+<!-- ///////  -->
+
+<!-- GitHub  -->
+
+<p id ="heading"> GitHub Project: </p>
+
+<p> <a href = "">  </a> </p>
+
+<!-- ///////  -->
+ 
+ <!-- Code  -->
+
+<p id ="heading"> Code: </p>
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+/**
+ * 
+ * @author Mahsa Sadi
+ * 
+ * @since 2020 - 04 - 08
+ * 
+ * License: Creative Commons
+ * 
+ * Copyright by Mahsa Sadi
+ *
+ */
+public class MaxSumSubArrayFinderV1 implements MaxSumSubArrayFinder {
+
+	
+	
+	/**
+	 * Problem : Maximum Sub-Array
+	 * 
+	 * 
+	 * 
+	 * 
+	 * Description:
+	 * Given an integer array nums, 
+	 * find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+	 * 
+	 * 
+	 * Solution:
+	 * 
+	 * 1- Start from the beginning of the array. 
+	 * 
+	 * 2- Add the elements to the maximum sub-array one by one.
+	 * 
+	 * 3- Compare the sum of the elements with the maximum sum.
+	 * 
+	 * 4- Update the maximum sum if required.
+	 * 
+	 * 5- As soon as the sum of the elements gets negative,
+	 *    reset sum to zero.
+	 *    
+	 * 6- Continue (Go to 2-).
+	 * 
+	 * 
+	 */
+	int maxSum, sum;
+	boolean maxSumSet = false;
+	
+	
+	@Override
+	public int maxSubArray(int[] nums) {
+		
+		maxSum = sum = 0;
+		
+		for (int i = 0; i < nums.length; i++)
+		{
+			sum += nums [i];
+			
+			if (sum > maxSum || ! maxSumSet)
+			     {
+				    maxSum = sum;
+			        maxSumSet = true;
+			     }
+			
+			if (sum < 0)
+			  sum = 0;
+		}
+	
+		return maxSum;
+	}
+
+}
+</pre>
+<!-- ///////  -->
+
+</code>
+
+</div>
+
+<body>
+
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+ 
+ 
+<title> Rotate Image </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+</head>
+
+
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id= "heading"> Title: </p>
+
+<p class = "strong" > Rotate Image - Version 1 </p> 
+
+<!-- ///////  -->
+
+
+<!-- Link to LeetCode -->
+
+<p id= "heading">Link to LeetCode:</p>
+
+<p> <a href = "https://leetcode.com/problems/rotate-image/"> https://leetcode.com/problems/rotate-image/ </a> </p>
+
+<!-- ///////  -->
+
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p> You are given an n x n 2D matrix representing an image. <br>
+    Rotate the image by 90 degrees (clockwise).<br> <br>
+	
+	Note: <br>
+	You have to rotate the image in-place, <br>
+	which means you have to modify the input 2D matrix directly. <br>
+	DO NOT allocate another 2D matrix and do the rotation.
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p> 
+Given input matrix = <br>
+[ <br>
+  [1,2,3], <br>
+  [4,5,6], <br>
+  [7,8,9] <br>
+], <br>
+
+rotate the input matrix in-place such that it becomes: <br>
+[ <br>
+  [7,4,1], <br>
+  [8,5,2], <br>
+  [9,6,3] <br>
+] <br>
+</p>
+
+
+<p class = "strong" > Example 2: </p>
+<p> 
+Given input matrix = <br>
+[ <br>
+  [ 5, 1, 9,11], <br>
+  [ 2, 4, 8,10], <br>
+  [13, 3, 6, 7], <br>
+  [15,14,12,16] <br>
+], <br>
+
+rotate the input matrix in-place such that it becomes: <br>
+[
+  [15,13, 2, 5], <br>
+  [14, 3, 4, 1], <br>
+  [12, 6, 8, 9], <br>
+  [16, 7,10,11] <br>
+] <br>
+</p>
+
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+public interface Rotater {
+	
+	 public void rotate(int[][] matrix);
+
+}
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+ Main Idea:
+	  
+	 In a 90-degree rotation, element a[i,j] goes to element a [j, n-i], <br>
+	 where n is the number of the last column (or row). <br>
+	 Simply, for each element in the matrix, the element should be rotated. <br>
+
+	 <ol>
+	 <li> Start from row 0.</li>
+	 <li> For each element in the row except the last element perform a circular rotation: </li>
+	 <ol>
+	 <li> a [row, j] -> a [j, n - 1 - row] </li>
+	 <li> a [j, n - 1 - row ] -> a [n - 1 - row, n - 1 - j] </li>
+	 <li> a [ n - 1 - row, n - 1 - j] -> a [ n - 1 - j, row] </li>
+	 <li> a [ n - 1 - j, row] -> a [row] [j] </li>
+	 </ol>
+	 Now, all the elements in row 0, row n-1, col 0 and col n-1 are rotated.
+	 The matrix that should be rotated is bounded to row 0, col n-2, row n-2, col 0.
+	 <li> repeat the rotation for the new matrix (new bounds) until its dimension is < = 1. </li>
+	 </ol>
+	 
+	 
+
+<!-- ///////  -->
+
+<!-- RunTime Analysis  -->
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p> </p>
+
+<!-- ///////  -->
+
+<!-- GitHub  -->
+
+<p id ="heading"> GitHub Project: </p>
+
+<p> <a href = "">  </a> </p>
+
+<!-- ///////  -->
+ 
+ <!-- Code  -->
+
+<p id ="heading"> Code: </p>
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+/**
+ * 
+ * @author Mahsa Sadi
+ * 
+ * @since 2020 - 03 - 07
+ * 
+ * License: Creative Commons
+ * 
+ * Copyright by Mahsa Sadi
+ *
+ */
+public class RotaterV3 implements Rotater {
+
+	
+	/**
+	 * 
+	 * 
+	 * Problem: Rotate Image
+	 * 
+	 * Description:
+	 * You are given an n x n 2D matrix representing an image.
+	 * Rotate the image by 90 degrees (clockwise).
+	 * 
+	 * 
+	 * Note:You have to rotate the image in-place, 
+	 * which means you have to modify the input 2D matrix directly. 
+	 * DO NOT allocate another 2D matrix and do the rotation.
+
+
+	 * 
+	 * Solution:
+	 * 
+	 * Main Idea:
+	 * 
+	 * In a 90-degree rotation, element a[i,j] goes to element a [j, n-i], 
+	 * where n is the number of the last column (or row).
+	 * 
+	 * Simply, for each element in the matrix, the element should be rotated.
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 1- Start from row 0.
+	 * 
+	 * 2- For each element in the row except the last element perform a circular rotation:
+	 *   a [row, j] -> a [j, n - 1 - row]
+	 *   a [j, n - 1 - row ] -> a [n - 1 - row, n - 1 - j]
+	 *   a [ n - 1 - row, n - 1 - j] -> a [ n - 1 - j, row]
+	 *   a [ n - 1 - j, row] -> a [row] [j] 
+	 *   
+	 * Now, all the elements in row 0, row n-1, col 0 and col n-1 are rotated.
+	 * The matrix that should be rotated is bounded to row 0, col n-2, row n-2, col 0.
+	 * 
+	 * 3- repeat the rotation for the new matrix until its size is < = 1 ;
+	 */
+	
+	@Override
+	public void rotate(int[][] matrix) {
+		
+		
+		rotateSquare (matrix, 0, matrix[0].length - 1 );
+
+	}
+	
+	
+	public void rotateSquare (int [][] matrix, int start, int end)
+	{
+		int temp1 , temp2, k; 
+		
+		for (int j = start; j < end; j++)
+		{
+			int rowToBeRotated = start;
+			int colToBeRotated = j;
+			
+			temp1 = matrix [rowToBeRotated][colToBeRotated];
+			
+			
+			for (int i = 0; i < 4; i++)
+			{
+				temp2 = matrix [colToBeRotated][start + end - rowToBeRotated];
+				
+				matrix [colToBeRotated][start + end - rowToBeRotated] = temp1;
+				
+				temp1 = temp2;
+				
+				k = rowToBeRotated ;
+				
+				rowToBeRotated = colToBeRotated;
+				
+				colToBeRotated =  start + end - k;				
+				
+			}
+		}
+		
+		if ( (end - 1) - (start + 1) + 1  > 1 )
+			   rotateSquare (matrix, start + 1, end - 1);
+			 
+			
+	}
+
+}
+</pre>
+<!-- ///////  -->
+
+</code>
+
+</div>
+
+<body>
+
+</html>

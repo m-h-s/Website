@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+ 
+ 
+<title> Calculate the Cartesian Product of n Sets </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+</head>
+
+
+
+<body>
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id= "heading"> Title: </p>
+
+<p class = "strong" > Calculate the Cartesian Product of n Sets </p> 
+
+<!-- ///////  -->
+
+
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p> 
+Given a variable number of sets, <br>
+calculate the Cartesian product of the given sets. <br>
+	 
+The sets are input as a list of lists.
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p> <strong>
+Input: </strong> <br>
+{1,2}, {3,4} <br><br>
+
+<strong> Output: </strong> <br>
+{1,3}, {1,4}, {2,3}, {2,4} <br><br>
+</p>
+
+
+<p class = "strong" > Example 2: </p>
+<p></p>
+
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+public &lt;List&lt;Integer&gt;&gt; cartesianProduct (List&lt;List&lt;Integer&gt;&gt; inputSets)
+	{ }
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+	<ol>
+	
+	<li> Pick the first set from the list if the list is not empty. </li>
+	<li> For each element in the first list, add the element to the result. </li>
+	<li> Remove the first set from the list. </li>
+	<li> Repeat (Go to 1-). </li>
+	<li> If the list is empty, add result to the list of answers. </li>
+	<li> Remove the added element from the result in order to add the next element. </li>
+	<li> Repeat (Go to 2-). </li>
+	 
+	</ol>
+	
+
+<!-- ///////  -->
+
+<!-- RunTime Analysis  -->
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p> </p>
+
+<!-- ///////  -->
+
+<!-- GitHub  -->
+
+<p id ="heading"> GitHub Project: </p>
+
+<p> <a href = "">  </a> </p>
+
+<!-- ///////  -->
+ 
+ <!-- Code  -->
+
+<p id ="heading"> Code: </p>
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+import java.util.*;
+/**
+ * 
+ * @author Mahsa Sadi
+ * 
+ * @since 2020 - 03 - 25
+ * 
+ * License: Creative Commons
+ * 
+ * Copyright by Mahsa Sadi
+ *
+ */
+
+
+public class SetOperations {
+
+	/**
+	 * 
+	 * Problem: 
+	 *  
+	 * Calculate the Cartesian Products of the Given Sets.
+	 * 
+	 * 
+	 * 
+	 * Description: 
+	 * 
+	 * Given a variable number of sets, 
+	 * produce the Cartesian product of the given sets.
+	 * 
+	 * The sets are input as a list of lists.
+	 * 
+	 * 
+	 * 
+	 * 
+	 * Solution:
+	 * 
+	 * 
+	 * 1- Pick the first set from the list if the list is not empty
+	 * 2- For each element in the first list, add the element to the result.
+	 * 3- Remove the first set from the list.
+	 * 4- Repeat (Go to 1-).
+	 * 5- If the list is empty, add result to the list of answers.
+	 * 6- Remove the added element from the result in order to add the next element.
+	 * 7- Repeat (Go to 2-)
+	 * 
+	 * 
+	 *
+	 */
+
+	List &lt;List&lt;Integer&gt;&gt; products;
+
+	public SetOperations ()
+	{
+		products = new ArrayList &lt;List &lt;Integer&gt;> ();
+	}
+
+
+
+
+
+	public List&lt;List&lt;Integer&gt;&gt; cartesianProduct (List&lt;List&lt;Integer&gt;&gt; inputSets) 
+	{
+		cartesianProduct(inputSets, new ArrayList &lt;Integer&gt; ());
+		return products;
+	}
+
+
+
+
+
+	public void cartesianProduct (List&lt;List&lt;Integer&gt;&gt; inputSets, List &lt;Integer&gt; result)
+	{
+		if ( inputSets.isEmpty() )
+		{ 
+
+			List&lt;Integer&gt;  copy = new ArrayList&lt;Integer&gt; ();
+
+			for (Integer e: result)
+				copy.add(e);
+
+			products.add(copy);
+
+		}
+
+
+		else
+		{
+			// 1- Pick the first set
+			for (Integer element: inputSets.get(0))
+			{
+				// 2- Add the elements of the set to the result one by one
+				result.add(element);
+
+				// 3- Continue multiplication
+				cartesianProduct (inputSets.subList(1, inputSets.size()), result);
+
+				//4- Remove the element to be replaced by another one in the same set.
+				result.remove(element);
+
+			}
+		}
+	}
+
+
+
+
+
+
+	public void printProducts ()
+	{
+		for (int j = 0; j < products.size(); j++)
+		{   
+			String s ="";
+
+			for (int i = 0; i < products.get(j).size(); i++)
+				s = s + products.get(j).get(i) + "  ";
+
+			System.out.println (s);
+
+		}
+
+	}
+
+}
+</pre>
+<!-- ///////  -->
+
+</code>
+
+</div>
+
+<body>
+
+</html>

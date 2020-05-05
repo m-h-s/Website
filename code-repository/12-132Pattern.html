@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-47250740-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-47250740-1');
+</script>
+ 
+ 
+<title> 132 Pattern </title>
+
+<link rel = "stylesheet"   href = "../css/repostyle.css" >
+
+<meta name = "author" content = "Mahsa Sadi">
+
+<meta name = "description" content = "code projects">
+
+<meta name = "keywords" content = "Java, Code, Problem, Solution">
+
+<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+
+
+<nav id= "navbar">
+<a href = "../index.html">Home</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Research and Publications.html">Research</a>   &nbsp &nbsp |  &nbsp &nbsp  
+<a href = "../Honors and Awards.html">Honors and Awards</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href="../Code%20Repository.html">Code Repository</a>  &nbsp &nbsp |  &nbsp &nbsp
+<a href = "../Teaching Experience.html">Teaching</a> &nbsp &nbsp |  &nbsp &nbsp
+<a href="">Interesting Research Projects</a>  
+</nav>
+
+</head>
+
+
+
+<body>
+
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+
+
+<div id = "code-description">
+
+
+<!-- Title -->
+
+<p id= "heading"> Title: </p>
+
+<p class = "strong" > 132 Pattern </p> 
+
+<!-- ///////  -->
+
+<!-- Link to LeetCode -->
+
+<p id= "heading">Link to LeetCode:</p>
+
+<p> <a href = "https://leetcode.com/problems/132-pattern/"> https://leetcode.com/problems/132-pattern/</a> </p>
+
+<!-- ///////  -->
+
+<!-- Problem -->
+
+<p id = "heading"> Specification: </p>
+
+<p> 
+Given a sequence of n integers a1, a2, ..., an, <br>
+a 132 pattern is a subsequence ai, aj, ak <br>
+such that i < j < k and ai < ak < aj. <br>
+Design an algorithm that takes a list of n numbers as input <br>
+and checks whether there is a 132 pattern in the list. <br>
+
+Note: n will be less than 15,000.
+</p>
+
+<!-- ///////  -->
+
+<!-- Examples -->
+
+<p id = "heading"> Examples: </p>
+
+<p class = "strong" > Example 1: </p>
+<p> 
+Input: [1, 2, 3, 4] <br>
+Output: False <br>
+Explanation: There is no 132 pattern in the sequence. <br>
+</p>
+
+
+<p class = "strong" > Example 2: </p>
+<p>
+Input: [3, 1, 4, 2] <br>
+Output: True <br>
+Explanation: There is a 132 pattern in the sequence: [1, 4, 2]. <br>
+</p>
+
+<p class = "strong" > Example 3: </p>
+<p>
+Input: [-1, 3, 2, 0] <br>
+
+Output: True <br>
+
+Explanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0]. <br>
+</p>
+
+<!-- ///////  -->
+
+
+<!-- Signature -->
+
+<p id = "heading"> Initial Code and Signature: </p>
+
+<div id ="code-snippet2">
+<code>
+<pre class="prettyprint">
+
+public interface PatternFinder {
+	
+	public boolean find123Pattern (int [] nums);
+
+}
+</pre>
+</code>
+</div>
+
+<!-- ///////  -->
+
+
+<!-- Solution  -->
+
+<p id = "heading">  Algorithm: </p>
+
+	 <p> Main idea: <br>
+	  
+	 Look for a max peak shape , or <br>
+	 a max and min peak shape in the input stream. <br> 
+	 <ol>
+
+	 <li> For each element in nums: <br>
+	 
+	      Delta = nums [i+1] - nums [i] </li>
+	 <li> As soon as delta gets negative,  <br>
+	      check for two criterion: <br>
+	          <ul> <li> an accumulative positive deltas is seen before. </li>
+	               <li> the absolute value of the seen negative delta is less than the accumulative positive deltas. </li>
+			  </ul>
+	        If the conditions hold return true. </li>
+	 <li> If the negative delta is greater than the accumulative positive difference: </li>
+	    <ul> <li> Reset accumulative positive deltas to zero. </li>
+	         <li> Remember the min and max nums from the last seen accumulative positive deltas. </li> </ul>
+     <li> If a positive delta is seen: </li>
+	 <ol> <li> Add it to positive accumulative deltas. </li>
+	      <li> If a negative delta has been seen before but the search process has not ended, <br>
+	           check whether nums [i] is greater than previous min and smaller than previous max. <br>
+	     
+	           If yes, return true. </li> </ol>    
+	 <li> Repeat (Go to 1-)   </li>
+	 </ol>
+     	 
+	
+	
+
+<!-- ///////  -->
+
+<!-- RunTime Analysis  -->
+
+<p id = "heading">  Run-Time Analysis: </p>
+<p> </p>
+
+<!-- ///////  -->
+
+<!-- GitHub  -->
+
+<p id ="heading"> GitHub Project: </p>
+
+<p> <a href = "">  </a> </p>
+
+<!-- ///////  -->
+ 
+ <!-- Code  -->
+
+<p id ="heading"> Code: </p>
+
+<!-- ///////  -->
+ 
+</div>
+
+<div id = "code-snippet">
+
+<code>
+<pre class="prettyprint">
+<!-- Code -->
+/**
+ * 
+ * @author Mahsa Sadi
+ * 
+ * @since 2020 - 04 - 04
+ * 
+ * License: Creative Commons
+ * 
+ * Copyright by Mahsa Sadi
+ *
+ */
+public class PatternFinderV1 implements PatternFinder {
+	
+	/**
+	 * Problem: 132Pattern
+	 * 
+	 * 
+	 * 
+	 * @see https://leetcode.com/problems/132-pattern/
+	 * 
+	 * 
+	 * Description:
+	 * 
+	 * 
+	 * Solution:
+	 * 
+	 * Main idea: 
+	 * 
+	 * Look for a max peak shape , or
+	 * a max and min peak shape in the input stream with the two following forms:
+	 * 
+	 *   "/"\"         "/"\
+	 *  "/  "\   or   "/  "\    "/
+	 * "/            "/    "\  "/
+	 *                      "\"/
+	 * 
+	 * 
+	 * 1- For each element in nums:
+	 * 
+	 * 2- Delta = nums [i+1] - nums [i]
+	 * 
+	 * 3- As soon as delta gets negative,
+	 *    check for two criterion:
+	 *        1- an accumulative positive deltas is seen before.
+	 *        2- the absolute value of the seen negative delta is less than the accumulative positive deltas.
+	 *        
+	 *    If the conditions hold return true.
+	 * 
+	 * 4- If the negative delta is greater than the accumulative positive difference:
+	 *    1- reset accumulative positive deltas to zero.
+	 *    2- remember the min and max nums from the last seen accumulative positive deltas.
+	 *    
+	 * 5- If a positive delta is seen:
+	 *     1- add it to positive accumulative deltas.
+	 *     2- If a negative delta has been seen before but the search process has not ended
+	 *        check whether nums [i] is greater than previous min and smaller than previous max
+	 *        
+	 *        if yes, return true.
+	 *        
+	 * 6- Repeat (Go to 1-)       
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+
+
+	int accumulativePositiveDif = 0;
+	int previousMin, currentMin;
+
+	int previousMax, currentMax;
+
+	boolean twoMins;
+
+	@Override
+	public boolean find123Pattern(int[] nums) {
+
+
+
+		if (nums.length == 0)
+			return false;
+
+		currentMin = nums [0];
+		currentMax = nums [0];
+
+		for (int i = 1; i < nums.length; i++)
+		{   
+
+			int delta = nums[i] - nums [i-1];
+
+			if ( delta >= 0 )
+			{ 
+				accumulativePositiveDif += delta;
+
+				if (twoMins && nums [i] > previousMin && nums [i] < previousMax)
+					return true;
+			}
+
+			else
+			{
+				if (Math.abs(delta) < accumulativePositiveDif)
+					return true;
+
+				else 
+				{   if (accumulativePositiveDif != 0)
+						{
+							accumulativePositiveDif = 0;
+							previousMin = currentMin;
+							previousMax= currentMax;
+							twoMins = true;
+						}
+				}
+
+			}
+
+			if (currentMin > nums [i])
+				currentMin = nums [i];
+
+			if (currentMax < nums [i])
+				currentMax = nums [i];
+
+
+
+		}
+
+		return false;
+	}
+
+}
+</pre>
+<!-- ///////  -->
+
+</code>
+
+</div>
+
+<body>
+
+</html>
